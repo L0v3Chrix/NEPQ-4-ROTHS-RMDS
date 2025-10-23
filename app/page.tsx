@@ -13,12 +13,12 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState('overview')
 
   return (
-    <div className="max-w-6xl mx-auto">
-      <div className="bg-white rounded-2xl shadow-2xl overflow-hidden">
+    <div className="max-w-6xl mx-auto px-2 md:px-0">
+      <div className="bg-white rounded-xl md:rounded-2xl shadow-2xl overflow-hidden">
         <Header />
         <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
 
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           {activeSection === 'overview' && <OverviewSection />}
 
           {stages.map((stage) => (

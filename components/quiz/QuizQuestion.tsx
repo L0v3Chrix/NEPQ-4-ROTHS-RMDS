@@ -18,10 +18,10 @@ export default function QuizQuestion({
   onAnswerSelect
 }: QuizQuestionProps) {
   const getOptionClassName = (index: number) => {
-    const base = 'bg-white p-4 my-2.5 rounded-lg cursor-pointer transition-all duration-300 border-2'
+    const base = 'bg-white p-4 md:p-4 my-3 md:my-2.5 rounded-lg cursor-pointer transition-all duration-300 border-2 min-h-[60px] md:min-h-0 flex items-center text-base md:text-base active:scale-98'
 
     if (!hasAnswered) {
-      return `${base} border-transparent hover:border-[#667eea] hover:translate-x-1`
+      return `${base} border-transparent hover:border-[#667eea] active:border-[#667eea]`
     }
 
     if (index === question.correctIndex) {
@@ -38,11 +38,11 @@ export default function QuizQuestion({
   const isCorrect = selectedAnswer === question.correctIndex
 
   return (
-    <div className="bg-gray-100 p-6 rounded-lg mb-5">
-      <h3 className="text-[#667eea] text-xl font-bold mb-5">Question {questionNumber}</h3>
-      <p className="text-xl mb-5 text-gray-800 leading-relaxed">{question.question}</p>
+    <div className="bg-gray-100 p-4 md:p-6 rounded-lg mb-4 md:mb-5">
+      <h3 className="text-[#667eea] text-lg md:text-xl font-bold mb-4 md:mb-5">Question {questionNumber}</h3>
+      <p className="text-base md:text-xl mb-4 md:mb-5 text-gray-800 leading-relaxed">{question.question}</p>
 
-      <div className="my-5">
+      <div className="my-4 md:my-5">
         {question.options.map((option, index) => (
           <div
             key={index}
@@ -56,7 +56,7 @@ export default function QuizQuestion({
       </div>
 
       {hasAnswered && (
-        <div className={`mt-4 p-4 rounded-lg font-medium ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+        <div className={`mt-4 p-4 rounded-lg font-medium text-sm md:text-base ${isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
           <strong>{isCorrect ? '✅ Correct!' : '❌ Incorrect'}</strong>
           <br />
           {question.explanation}
