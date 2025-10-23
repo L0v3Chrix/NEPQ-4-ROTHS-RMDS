@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEPQ Training Guide: Roth Conversions, RMDs & Infinite Banking</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+            overflow-x: auto;
+        }
+
+        .nav-tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1em;
+            color: #495057;
+            transition: all 0.3s;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            background: #e9ecef;
+        }
+
+        .nav-tab.active {
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .nav-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #667eea;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .stage-section {
+            display: none;
+        }
+
+        .stage-section.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .stage-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .stage-header h2 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .stage-header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .question-card {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .question-card:hover {
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+
+        .question-text {
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: start;
+        }
+
+        .question-icon {
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            font-weight: bold;
+        }
+
+        .psychology-toggle {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s;
+            margin-bottom: 10px;
+        }
+
+        .psychology-toggle:hover {
+            background: #5568d3;
+            transform: scale(1.05);
+        }
+
+        .psychology-content {
+            display: none;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 2px solid #667eea;
+        }
+
+        .psychology-content.show {
+            display: block;
+            animation: slideDown 0.3s;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 500px; }
+        }
+
+        .psychology-title {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .psychology-text {
+            color: #495057;
+            line-height: 1.6;
+        }
+
+        .transition-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-weight: 500;
+        }
+
+        .transition-box strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        /* Flashcard Mode */
+        .flashcard-container {
+            perspective: 1000px;
+            height: 400px;
+            margin: 30px auto;
+            max-width: 600px;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .flashcard-front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .flashcard-back {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-text {
+            font-size: 1.3em;
+            line-height: 1.6;
+        }
+
+        .flashcard-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            background: #e9ecef;
+            height: 25px;
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            height: 100%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        /* Quiz Mode */
+        .quiz-question {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .quiz-options {
+            margin-top: 20px;
+        }
+
+        .quiz-option {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+
+        .quiz-option.incorrect {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+
+        .quiz-feedback {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .quiz-feedback.correct {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .quiz-feedback.incorrect {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .score-display {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .score-display h3 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tab {
+                padding: 12px 15px;
+                font-size: 0.9em;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .flashcard-container {
+                height: 350px;
+            }
+
+            .flashcard-text {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 NEPQ Training Guide</h1>
+            <p>Roth Conversions, RMDs & Infinite Banking</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview')">Overview</button>
+            <button class="nav-tab" onclick="showSection('stage1')">Stage 1: Connection</button>
+            <button class="nav-tab" onclick="showSection('stage2')">Stage 2: Situation</button>
+            <button class="nav-tab" onclick="showSection('stage3')">Stage 3: Problem</button>
+            <button class="nav-tab" onclick="showSection('stage4')">Stage 4: Solution</button>
+            <button class="nav-tab" onclick="showSection('stage5')">Stage 5: Consequence</button>
+            <button class="nav-tab" onclick="showSection('stage6')">Stage 6: Commitment</button>
+            <button class="nav-tab" onclick="showSection('practice')">🎴 Practice</button>
+            <button class="nav-tab" onclick="showSection('quiz')">📝 Quiz</button>
+        </div>
+
+        <div class="content">
+            <!-- Overview Section -->
+            <div id="overview" class="stage-section active">
+                <div class="stage-header">
+                    <h2>Welcome to Your NEPQ Training Guide</h2>
+                    <p>Master the art of consultative selling through neuro-emotional questioning</p>
+                </div>
+                
+                <div class="question-card">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">What is NEPQ?</h3>
+                    <p style="line-height: 1.8; color: #495057;">
+                        <strong>Neuro-Emotional Persuasion Questioning (NEPQ)</strong> is a consultative sales methodology that guides prospects through a journey of self-discovery. Rather than pitching, you're helping them uncover their own pain points and arrive at their own conclusions about the need for change.
+                    </p>
+                </div>
+
+                <div class="question-card">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">The Six Stages</h3>
+                    <p style="line-height: 1.8; color: #495057; margin-bottom: 10px;">
+                        <strong>1. Connection Questions:</strong> Build rapport and trust<br>
+                        <strong>2. Situation Questions:</strong> Understand their current state<br>
+                        <strong>3. Problem Awareness:</strong> Help them see the gaps<br>
+                        <strong>4. Solution Awareness:</strong> Guide toward possibilities<br>
+                        <strong>5. Consequence Questions:</strong> Amplify urgency<br>
+                        <strong>6. Commitment Questions:</strong> Secure next steps
+                    </p>
+                </div>
+
+                <div class="question-card">
+                    <h3 style="color: #667eea; margin-bottom: 15px;">How to Use This Guide</h3>
+                    <p style="line-height: 1.8; color: #495057;">
+                        📖 <strong>Study Mode:</strong> Navigate through each stage to see questions and their psychology<br>
+                        🎴 <strong>Practice Mode:</strong> Use flashcards to memorize questions<br>
+                        📝 <strong>Quiz Mode:</strong> Test your understanding of the methodology
+                    </p>
+                </div>
+            </div>
+
+            <!-- Stage 1: Connection -->
+            <div id="stage1" class="stage-section">
+                <div class="stage-header">
+                    <h2>Stage 1: Connection Questions</h2>
+                    <p>Build rapport and establish trust by showing genuine curiosity about their situation</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q1</span>
+                        <span>Just so I don't assume—how are you currently set up tax-wise for retirement?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            The phrase "just so I don't assume" demonstrates humility and respect. It positions you as a consultant, not a salesperson. This open-ended question gets them talking about their current situation without feeling interrogated.
+                            <br><br>
+                            <strong>Key Principle:</strong> Disarming language removes sales resistance and creates psychological safety.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q2</span>
+                        <span>What got you thinking about your financial future more seriously at this stage?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This question uncovers their emotional trigger or catalyst. Understanding <em>why now</em> gives you insight into their urgency and motivation. People buy emotionally and justify logically.
+                            <br><br>
+                            <strong>Key Principle:</strong> Discover the emotional driver behind their search for solutions.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q3</span>
+                        <span>Was it something you saw, or something someone said that got you curious about taxes in retirement?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This digs deeper into their awareness journey. By giving them two options (something seen vs. something said), you make it easier for them to recall and share. This reveals whether they're reacting to external stimuli or internal concerns.
+                            <br><br>
+                            <strong>Key Principle:</strong> Specific prompts help prospects articulate vague concerns.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transition-box">
+                    <strong>Transition to Situation:</strong>
+                    Would it be okay if I asked a few questions about your current setup to understand what you're working with?
+                    <br><br>
+                    <em>Psychology: Asking permission maintains rapport and gives them control. They'll almost always say yes, but you've positioned the next questions as collaborative exploration.</em>
+                </div>
+            </div>
+
+            <!-- Stage 2: Situation -->
+            <div id="stage2" class="stage-section">
+                <div class="stage-header">
+                    <h2>Stage 2: Situation Questions</h2>
+                    <p>Gather facts about their current state to identify gaps and opportunities</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q1</span>
+                        <span>What types of retirement accounts are you currently using to grow your money?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This is pure fact-finding but phrased positively ("grow your money"). You're gathering intel about their tax exposure (401k, IRA, Roth, etc.) while keeping the conversation forward-focused.
+                            <br><br>
+                            <strong>Key Principle:</strong> Frame factual questions in aspirational language.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q2</span>
+                        <span>How do you see yourself using those funds when you retire?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This activates their imagination and helps them visualize retirement. It also reveals whether they've thought through their distribution strategy or are simply accumulating without a plan.
+                            <br><br>
+                            <strong>Key Principle:</strong> Get them dreaming before you introduce problems.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q3</span>
+                        <span>Have you calculated what your RMDs might look like once you hit age 73 or 75?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            Most people haven't done this math. This question plants a seed that there's something they should know about. The specific ages add credibility and show you're knowledgeable.
+                            <br><br>
+                            <strong>Key Principle:</strong> Expose knowledge gaps without making them feel ignorant.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q4</span>
+                        <span>What have you done so far to manage taxes on those future withdrawals?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This assumes they should be doing something (they probably aren't). The phrase "so far" implies an ongoing process they're behind on. You're creating gentle tension.
+                            <br><br>
+                            <strong>Key Principle:</strong> Presuppositions guide thinking without being pushy.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transition-box">
+                    <strong>Transition to Problem Awareness:</strong>
+                    That gives me some helpful context—can I ask you a few things that might reveal some hidden risks with that approach?
+                    <br><br>
+                    <em>Psychology: "Hidden risks" creates curiosity and slight concern. You're positioning yourself as someone who sees what they can't.</em>
+                </div>
+            </div>
+
+            <!-- Stage 3: Problem Awareness -->
+            <div id="stage3" class="stage-section">
+                <div class="stage-header">
+                    <h2>Stage 3: Problem Awareness Questions</h2>
+                    <p>Help them discover the gaps and risks in their current approach</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q1</span>
+                        <span>Have you thought about what could happen if taxes are higher when you're forced to withdraw those RMDs?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This introduces future pain without stating it directly. The word "forced" emphasizes lack of control. You're painting a picture of a future problem they may not have considered.
+                            <br><br>
+                            <strong>Key Principle:</strong> Questions that project into the future create urgency without pressure.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q2</span>
+                        <span>What concerns do you have about being required to take money out—whether you need it or not?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This question highlights the absurdity of RMDs—you saved this money, but the government forces you to withdraw it. The phrase "whether you need it or not" emphasizes loss of autonomy.
+                            <br><br>
+                            <strong>Key Principle:</strong> Frame the problem as a loss of control, which is highly motivating.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q3</span>
+                        <span>How would it affect your lifestyle if your taxable income suddenly jumped because of RMDs?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This connects the problem to their lived experience. "Lifestyle" is emotional; "taxable income" is technical. You're bridging the gap between numbers and real-world impact.
+                            <br><br>
+                            <strong>Key Principle:</strong> Link financial concepts to emotional outcomes.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q4</span>
+                        <span>Do you feel like you have full control over when and how you pay taxes on your retirement funds?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This is a powerful "feeling" question. Most people will realize they don't have control. You're making them articulate their own problem, which is far more persuasive than you telling them.
+                            <br><br>
+                            <strong>Key Principle:</strong> When they say the problem, it becomes their truth.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transition-box">
+                    <strong>Transition to Solution Awareness:</strong>
+                    I'm curious—what would you ideally want to see happen instead in that situation?
+                    <br><br>
+                    <em>Psychology: This shifts from problem to possibility. By asking what they want, you're priming them to be receptive to your solution.</em>
+                </div>
+            </div>
+
+            <!-- Stage 4: Solution Awareness -->
+            <div id="stage4" class="stage-section">
+                <div class="stage-header">
+                    <h2>Stage 4: Solution Awareness Questions</h2>
+                    <p>Guide them toward recognizing the value of your solution without pitching</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q1</span>
+                        <span>If you could reposition some of your assets now to eliminate RMDs later—would that be something worth exploring?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This is a hypothetical that introduces your solution indirectly. "If you could" makes it feel like their idea. "Worth exploring" is low-pressure language that invites curiosity.
+                            <br><br>
+                            <strong>Key Principle:</strong> Present solutions as possibilities, not prescriptions.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q2</span>
+                        <span>How important is it for you to create tax-free income you can access without IRS restrictions?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This question makes them rate the importance themselves. "Tax-free income" and "without IRS restrictions" paint an aspirational picture. They're selling themselves.
+                            <br><br>
+                            <strong>Key Principle:</strong> Get them to articulate the value of your solution.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q3</span>
+                        <span>What would it mean for your peace of mind if your retirement strategy removed the tax uncertainty?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            "Peace of mind" taps into deep emotional needs. "Tax uncertainty" frames the status quo as stressful. You're helping them visualize the emotional payoff of solving this problem.
+                            <br><br>
+                            <strong>Key Principle:</strong> Sell the emotional benefit, not the technical features.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q4</span>
+                        <span>Have you ever heard of ways people use tax-advantaged life insurance to create income that doesn't count against RMDs?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This introduces your specific solution (life insurance/infinite banking) without a pitch. "Have you heard" makes it educational. You're planting seeds of the strategy you'll present.
+                            <br><br>
+                            <strong>Key Principle:</strong> Educate through questions, not statements.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transition-box">
+                    <strong>Transition to Consequence Questions:</strong>
+                    Let me ask this—what do you think could happen if this isn't addressed sooner rather than later?
+                    <br><br>
+                    <em>Psychology: This pivots to urgency. You're asking them to articulate the cost of inaction, which is powerful motivation.</em>
+                </div>
+            </div>
+
+            <!-- Stage 5: Consequence -->
+            <div id="stage5" class="stage-section">
+                <div class="stage-header">
+                    <h2>Stage 5: Consequence Questions</h2>
+                    <p>Amplify urgency by exploring the cost of inaction</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q1</span>
+                        <span>What do you think the long-term impact could be if you keep delaying Roth conversions while taxes are still relatively low?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            "Keep delaying" presupposes they're already procrastinating. "While taxes are still relatively low" creates urgency around a limited-time opportunity. You're making inaction feel risky.
+                            <br><br>
+                            <strong>Key Principle:</strong> Frame inaction as an active choice with consequences.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q2</span>
+                        <span>What might that cost you over 10 or 15 years in taxes?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This forces them to think long-term and quantify the problem. Even if they can't calculate exactly, their brain starts churning on big numbers. Loss aversion kicks in.
+                            <br><br>
+                            <strong>Key Principle:</strong> Make the invisible cost visible and tangible.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q3</span>
+                        <span>How would your family be affected if your estate was mostly taxable when passed on?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This introduces legacy impact—a powerful motivator. People care deeply about not burdening their family. You're expanding the consequence beyond just them to people they love.
+                            <br><br>
+                            <strong>Key Principle:</strong> Leverage altruistic motivation when possible.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q4</span>
+                        <span>What's the risk to you if you do nothing and tax rules change again?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This final consequence question creates maximum urgency. Tax laws are constantly changing, and people fear losing opportunities. "Do nothing" makes inaction feel irresponsible.
+                            <br><br>
+                            <strong>Key Principle:</strong> Amplify urgency by introducing external uncertainty.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transition-box">
+                    <strong>Transition to Commitment:</strong>
+                    It sounds like this could be a bigger issue than it seemed at first—can I show you what others in your situation are doing to protect themselves?
+                    <br><br>
+                    <em>Psychology: "Bigger issue" validates their concern. "Others in your situation" uses social proof. "Protect themselves" frames your solution as protective, not risky.</em>
+                </div>
+            </div>
+
+            <!-- Stage 6: Commitment -->
+            <div id="stage6" class="stage-section">
+                <div class="stage-header">
+                    <h2>Stage 6: Commitment Questions</h2>
+                    <p>Secure buy-in and move toward action</p>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q1</span>
+                        <span>If we found a way to reposition your assets over time that lowers future taxes and gives you more control, would you be open to seeing how that might work for you?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This is a trial close disguised as a question. "If we found" makes it collaborative. "Would you be open" is minimal resistance language. You're not asking for commitment, just permission to show them.
+                            <br><br>
+                            <strong>Key Principle:</strong> Get small yeses that lead to bigger yeses.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q2</span>
+                        <span>What would you need to see in a plan like that to feel confident it's the right move?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This uncovers their buying criteria in their own words. When you know what they need to see, you can tailor your presentation. They're also mentally rehearsing saying yes.
+                            <br><br>
+                            <strong>Key Principle:</strong> Let them define success so you can deliver exactly that.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div class="question-text">
+                        <span class="question-icon">Q3</span>
+                        <span>Do you feel like now is the right time to explore this before tax rates potentially change?</span>
+                    </div>
+                    <button class="psychology-toggle" onclick="togglePsychology(this)">💡 Show Psychology</button>
+                    <div class="psychology-content">
+                        <div class="psychology-title">🧠 Why This Works:</div>
+                        <div class="psychology-text">
+                            This is urgency reinforcement. "Now is the right time" primes them to act. "Before tax rates potentially change" reintroduces scarcity and fear of missing out.
+                            <br><br>
+                            <strong>Key Principle:</strong> End with urgency to prevent procrastination.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: #d4edda; padding: 20px; border-radius: 10px; border-left: 4px solid #28a745; margin-top: 30px;">
+                    <h3 style="color: #155724; margin-bottom: 10px;">🎯 You've Reached the Commitment Stage!</h3>
+                    <p style="color: #155724; line-height: 1.6;">
+                        If you've done your job well through stages 1-5, these commitment questions should feel natural. The prospect has convinced themselves they have a problem and is now looking to you for the solution. Schedule the next meeting, send the illustration, or take whatever next step is appropriate for your process.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Practice Mode -->
+            <div id="practice" class="stage-section">
+                <div class="stage-header">
+                    <h2>🎴 Practice Mode</h2>
+                    <p>Test your memorization with interactive flashcards</p>
+                </div>
+
+                <div class="score-display">
+                    <h3 id="flashcardProgress">Card 1 of 22</h3>
+                </div>
+
+                <div class="flashcard-container">
+                    <div class="flashcard" id="flashcard" onclick="flipCard()">
+                        <div class="flashcard-front">
+                            <div class="flashcard-text" id="flashcardFront">Click to start</div>
+                        </div>
+                        <div class="flashcard-back">
+                            <div class="flashcard-text" id="flashcardBack">Psychology explanation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flashcard-controls">
+                    <button class="btn btn-secondary" onclick="previousCard()">⬅️ Previous</button>
+                    <button class="btn btn-primary" onclick="flipCard()">🔄 Flip Card</button>
+                    <button class="btn btn-secondary" onclick="nextCard()">Next ➡️</button>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="flashcardProgressBar" style="width: 0%">0%</div>
+                </div>
+            </div>
+
+            <!-- Quiz Mode -->
+            <div id="quiz" class="stage-section">
+                <div class="stage-header">
+                    <h2>📝 Quiz Mode</h2>
+                    <p>Test your understanding of the NEPQ methodology</p>
+                </div>
+
+                <div class="score-display">
+                    <h3>Score: <span id="quizScore">0</span> / <span id="quizTotal">0</span></h3>
+                    <p>Question <span id="quizProgress">1</span> of 10</p>
+                </div>
+
+                <div id="quizContent"></div>
+
+                <div class="flashcard-controls">
+                    <button class="btn btn-secondary" onclick="previousQuizQuestion()" id="prevQuizBtn" style="display:none;">⬅️ Previous</button>
+                    <button class="btn btn-primary" onclick="nextQuizQuestion()" id="nextQuizBtn">Start Quiz</button>
+                    <button class="btn btn-success" onclick="restartQuiz()" id="restartQuizBtn" style="display:none;">🔄 Restart Quiz</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.stage-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Initialize quiz if quiz section is opened
+            if (sectionId === 'quiz' && !quizInitialized) {
+                initializeQuiz();
+            }
+
+            // Initialize flashcards if practice section is opened
+            if (sectionId === 'practice' && !flashcardsInitialized) {
+                initializeFlashcards();
+            }
+        }
+
+        // Psychology toggle
+        function togglePsychology(button) {
+            const content = button.nextElementSibling;
+            content.classList.toggle('show');
+            button.textContent = content.classList.contains('show') ? '🔼 Hide Psychology' : '💡 Show Psychology';
+        }
+
+        // Flashcard data
+        const flashcards = [
+            {
+                stage: "Connection",
+                question: "Just so I don't assume—how are you currently set up tax-wise for retirement?",
+                psychology: "Disarming language ('just so I don't assume') removes sales resistance and creates psychological safety."
+            },
+            {
+                stage: "Connection",
+                question: "What got you thinking about your financial future more seriously at this stage?",
+                psychology: "Uncovers the emotional trigger or catalyst. People buy emotionally and justify logically."
+            },
+            {
+                stage: "Connection",
+                question: "Was it something you saw, or something someone said that got you curious about taxes in retirement?",
+                psychology: "Specific prompts help prospects articulate vague concerns and reveal their awareness journey."
+            },
+            {
+                stage: "Situation",
+                question: "What types of retirement accounts are you currently using to grow your money?",
+                psychology: "Fact-finding phrased positively. Gather intel while keeping conversation forward-focused."
+            },
+            {
+                stage: "Situation",
+                question: "How do you see yourself using those funds when you retire?",
+                psychology: "Activates imagination and reveals whether they've thought through distribution strategy."
+            },
+            {
+                stage: "Situation",
+                question: "Have you calculated what your RMDs might look like once you hit age 73 or 75?",
+                psychology: "Exposes knowledge gaps without making them feel ignorant. Plants seed of missing awareness."
+            },
+            {
+                stage: "Situation",
+                question: "What have you done so far to manage taxes on those future withdrawals?",
+                psychology: "Presupposes they should be doing something. Creates gentle tension around inaction."
+            },
+            {
+                stage: "Problem Awareness",
+                question: "Have you thought about what could happen if taxes are higher when you're forced to withdraw those RMDs?",
+                psychology: "Projects into future without stating problem directly. 'Forced' emphasizes lack of control."
+            },
+            {
+                stage: "Problem Awareness",
+                question: "What concerns do you have about being required to take money out—whether you need it or not?",
+                psychology: "Highlights absurdity of RMDs. Loss of autonomy is highly motivating."
+            },
+            {
+                stage: "Problem Awareness",
+                question: "How would it affect your lifestyle if your taxable income suddenly jumped because of RMDs?",
+                psychology: "Links financial concepts to emotional outcomes. Connects numbers to lived experience."
+            },
+            {
+                stage: "Problem Awareness",
+                question: "Do you feel like you have full control over when and how you pay taxes on your retirement funds?",
+                psychology: "When they articulate the problem themselves, it becomes their truth—far more persuasive."
+            },
+            {
+                stage: "Solution Awareness",
+                question: "If you could reposition some of your assets now to eliminate RMDs later—would that be something worth exploring?",
+                psychology: "Hypothetical makes solution feel like their idea. 'Worth exploring' is low-pressure."
+            },
+            {
+                stage: "Solution Awareness",
+                question: "How important is it for you to create tax-free income you can access without IRS restrictions?",
+                psychology: "Makes them rate importance themselves. They're selling themselves on the value."
+            },
+            {
+                stage: "Solution Awareness",
+                question: "What would it mean for your peace of mind if your retirement strategy removed the tax uncertainty?",
+                psychology: "Taps into deep emotional needs. Sell the emotional benefit, not technical features."
+            },
+            {
+                stage: "Solution Awareness",
+                question: "Have you ever heard of ways people use tax-advantaged life insurance to create income that doesn't count against RMDs?",
+                psychology: "Introduces specific solution without pitching. Educate through questions, not statements."
+            },
+            {
+                stage: "Consequence",
+                question: "What do you think the long-term impact could be if you keep delaying Roth conversions while taxes are still relatively low?",
+                psychology: "Frames inaction as active choice with consequences. Creates urgency around opportunity."
+            },
+            {
+                stage: "Consequence",
+                question: "What might that cost you over 10 or 15 years in taxes?",
+                psychology: "Makes invisible cost visible and tangible. Loss aversion kicks in with big numbers."
+            },
+            {
+                stage: "Consequence",
+                question: "How would your family be affected if your estate was mostly taxable when passed on?",
+                psychology: "Leverages altruistic motivation. People care deeply about not burdening family."
+            },
+            {
+                stage: "Consequence",
+                question: "What's the risk to you if you do nothing and tax rules change again?",
+                psychology: "Amplifies urgency through external uncertainty. Makes inaction feel irresponsible."
+            },
+            {
+                stage: "Commitment",
+                question: "If we found a way to reposition your assets over time that lowers future taxes and gives you more control, would you be open to seeing how that might work for you?",
+                psychology: "Trial close disguised as question. Get small yeses that lead to bigger yeses."
+            },
+            {
+                stage: "Commitment",
+                question: "What would you need to see in a plan like that to feel confident it's the right move?",
+                psychology: "Uncovers buying criteria in their own words. They mentally rehearse saying yes."
+            },
+            {
+                stage: "Commitment",
+                question: "Do you feel like now is the right time to explore this before tax rates potentially change?",
+                psychology: "Urgency reinforcement. Reintroduces scarcity and fear of missing out."
+            }
+        ];
+
+        let currentFlashcard = 0;
+        let flashcardsInitialized = false;
+
+        function initializeFlashcards() {
+            flashcardsInitialized = true;
+            displayFlashcard();
+        }
+
+        function displayFlashcard() {
+            const card = flashcards[currentFlashcard];
+            document.getElementById('flashcardFront').textContent = `${card.stage}: ${card.question}`;
+            document.getElementById('flashcardBack').textContent = card.psychology;
+            document.getElementById('flashcardProgress').textContent = `Card ${currentFlashcard + 1} of ${flashcards.length}`;
+            
+            // Reset flip
+            document.getElementById('flashcard').classList.remove('flipped');
+            
+            // Update progress bar
+            const progress = ((currentFlashcard + 1) / flashcards.length) * 100;
+            document.getElementById('flashcardProgressBar').style.width = progress + '%';
+            document.getElementById('flashcardProgressBar').textContent = Math.round(progress) + '%';
+        }
+
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+
+        function nextCard() {
+            if (currentFlashcard < flashcards.length - 1) {
+                currentFlashcard++;
+                displayFlashcard();
+            }
+        }
+
+        function previousCard() {
+            if (currentFlashcard > 0) {
+                currentFlashcard--;
+                displayFlashcard();
+            }
+        }
+
+        // Quiz data
+        const quizQuestions = [
+            {
+                question: "What is the primary purpose of Connection Questions in NEPQ?",
+                options: [
+                    "To gather detailed financial information",
+                    "To build rapport and establish trust",
+                    "To present your solution",
+                    "To close the sale"
+                ],
+                correct: 1,
+                explanation: "Connection Questions are designed to build rapport and establish trust by showing genuine curiosity about the prospect's situation, not to gather detailed information or pitch."
+            },
+            {
+                question: "Why is the phrase 'just so I don't assume' effective?",
+                options: [
+                    "It makes you sound uncertain",
+                    "It demonstrates humility and respect",
+                    "It confuses the prospect",
+                    "It fills time in the conversation"
+                ],
+                correct: 1,
+                explanation: "This disarming language demonstrates humility and respect, positioning you as a consultant rather than a salesperson, which removes sales resistance."
+            },
+            {
+                question: "What should Situation Questions accomplish?",
+                options: [
+                    "Make the prospect feel inadequate",
+                    "Present your product features",
+                    "Gather facts about their current state",
+                    "Create immediate urgency"
+                ],
+                correct: 2,
+                explanation: "Situation Questions are designed to gather factual information about the prospect's current state to identify gaps and opportunities for your solution."
+            },
+            {
+                question: "In Problem Awareness stage, what's the key principle?",
+                options: [
+                    "Tell them directly what their problems are",
+                    "Help them discover problems themselves",
+                    "Minimize their concerns",
+                    "Focus on your solution immediately"
+                ],
+                correct: 1,
+                explanation: "Problem Awareness is about helping prospects discover gaps and risks themselves. When they articulate the problem, it becomes their truth—far more persuasive than you telling them."
+            },
+            {
+                question: "Why ask 'What concerns do you have about being required to take money out—whether you need it or not?'",
+                options: [
+                    "To confuse them about RMDs",
+                    "To highlight loss of control and autonomy",
+                    "To criticize their planning",
+                    "To show off your knowledge"
+                ],
+                correct: 1,
+                explanation: "This question highlights the absurdity of RMDs and emphasizes loss of autonomy, which is a highly motivating psychological trigger."
+            },
+            {
+                question: "What makes Solution Awareness questions effective?",
+                options: [
+                    "They directly pitch your product",
+                    "They present solutions as possibilities, not prescriptions",
+                    "They pressure the prospect to decide",
+                    "They focus on competitor weaknesses"
+                ],
+                correct: 1,
+                explanation: "Solution Awareness questions are effective because they present solutions as possibilities rather than prescriptions, making the prospect feel like the solution is their idea."
+            },
+            {
+                question: "What's the purpose of Consequence Questions?",
+                options: [
+                    "To scare the prospect into buying",
+                    "To amplify urgency by exploring cost of inaction",
+                    "To prove you're right",
+                    "To demonstrate your expertise"
+                ],
+                correct: 1,
+                explanation: "Consequence Questions amplify urgency by helping the prospect understand the cost of inaction, framing doing nothing as an active choice with negative consequences."
+            },
+            {
+                question: "Why mention 'How would your family be affected...'?",
+                options: [
+                    "To make them feel guilty",
+                    "To leverage altruistic motivation about legacy",
+                    "To change the topic",
+                    "To sell estate planning products"
+                ],
+                correct: 1,
+                explanation: "This leverages altruistic motivation—people care deeply about not burdening their family. It expands consequences beyond just the prospect to people they love."
+            },
+            {
+                question: "In Commitment stage, why ask 'What would you need to see...'?",
+                options: [
+                    "To delay the close",
+                    "To uncover their buying criteria in their own words",
+                    "To show you don't know what to present",
+                    "To avoid presenting a solution"
+                ],
+                correct: 1,
+                explanation: "This uncovers their buying criteria in their own words, allowing you to tailor your presentation to exactly what they need to see. They also mentally rehearse saying yes."
+            },
+            {
+                question: "What is the fundamental principle behind NEPQ?",
+                options: [
+                    "The agent should do most of the talking",
+                    "Prospects convince themselves through self-discovery",
+                    "Always Be Closing (ABC)",
+                    "Present features and benefits immediately"
+                ],
+                correct: 1,
+                explanation: "NEPQ is based on the principle that prospects convince themselves through a journey of self-discovery guided by strategic questions, rather than being pitched to."
+            }
+        ];
+
+        let currentQuizQuestion = 0;
+        let quizScore = 0;
+        let quizAnswered = false;
+        let quizInitialized = false;
+
+        function initializeQuiz() {
+            quizInitialized = true;
+            currentQuizQuestion = 0;
+            quizScore = 0;
+            quizAnswered = false;
+            document.getElementById('quizScore').textContent = '0';
+            document.getElementById('quizTotal').textContent = quizQuestions.length;
+            document.getElementById('nextQuizBtn').style.display = 'inline-block';
+            document.getElementById('prevQuizBtn').style.display = 'none';
+            document.getElementById('restartQuizBtn').style.display = 'none';
+            document.getElementById('quizContent').innerHTML = '<p style="text-align:center; font-size:1.2em; color:#667eea;">Click "Start Quiz" to begin testing your knowledge!</p>';
+        }
+
+        function displayQuizQuestion() {
+            const question = quizQuestions[currentQuizQuestion];
+            quizAnswered = false;
+            
+            let html = `
+                <div class="quiz-question">
+                    <h3 style="color: #667eea; margin-bottom: 20px;">Question ${currentQuizQuestion + 1}</h3>
+                    <p style="font-size: 1.2em; margin-bottom: 20px; color: #2c3e50;">${question.question}</p>
+                    <div class="quiz-options">
+            `;
+            
+            question.options.forEach((option, index) => {
+                html += `<div class="quiz-option" onclick="selectAnswer(${index})">${option}</div>`;
+            });
+            
+            html += `
+                    </div>
+                    <div id="quizFeedback"></div>
+                </div>
+            `;
+            
+            document.getElementById('quizContent').innerHTML = html;
+            document.getElementById('quizProgress').textContent = currentQuizQuestion + 1;
+            
+            // Update button visibility
+            document.getElementById('prevQuizBtn').style.display = currentQuizQuestion > 0 ? 'inline-block' : 'none';
+            document.getElementById('nextQuizBtn').textContent = currentQuizQuestion === 0 ? 'Start Quiz' : (currentQuizQuestion < quizQuestions.length - 1 ? 'Next Question ➡️' : 'See Results');
+        }
+
+        function selectAnswer(selectedIndex) {
+            if (quizAnswered) return;
+            
+            quizAnswered = true;
+            const question = quizQuestions[currentQuizQuestion];
+            const options = document.querySelectorAll('.quiz-option');
+            
+            options.forEach((option, index) => {
+                option.style.pointerEvents = 'none';
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedIndex) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            const isCorrect = selectedIndex === question.correct;
+            if (isCorrect) {
+                quizScore++;
+                document.getElementById('quizScore').textContent = quizScore;
+            }
+            
+            const feedback = document.getElementById('quizFeedback');
+            feedback.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'incorrect');
+            feedback.innerHTML = `
+                <strong>${isCorrect ? '✅ Correct!' : '❌ Incorrect'}</strong><br>
+                ${question.explanation}
+            `;
+        }
+
+        function nextQuizQuestion() {
+            if (currentQuizQuestion === 0 && !quizAnswered) {
+                // Starting quiz
+                displayQuizQuestion();
+                return;
+            }
+            
+            if (!quizAnswered && currentQuizQuestion > 0) {
+                alert('Please select an answer before moving to the next question.');
+                return;
+            }
+            
+            if (currentQuizQuestion < quizQuestions.length - 1) {
+                currentQuizQuestion++;
+                displayQuizQuestion();
+            } else {
+                // Show results
+                showQuizResults();
+            }
+        }
+
+        function previousQuizQuestion() {
+            if (currentQuizQuestion > 0) {
+                currentQuizQuestion--;
+                displayQuizQuestion();
+            }
+        }
+
+        function showQuizResults() {
+            const percentage = Math.round((quizScore / quizQuestions.length) * 100);
+            let message = '';
+            let emoji = '';
+            
+            if (percentage >= 90) {
+                message = 'Outstanding! You have mastered the NEPQ methodology!';
+                emoji = '🌟';
+            } else if (percentage >= 70) {
+                message = 'Great job! You have a solid understanding of NEPQ.';
+                emoji = '🎯';
+            } else if (percentage >= 50) {
+                message = 'Good effort! Review the stages and try again.';
+                emoji = '📚';
+            } else {
+                message = 'Keep studying! Go back through each stage carefully.';
+                emoji = '💪';
+            }
+            
+            document.getElementById('quizContent').innerHTML = `
+                <div style="text-align: center; padding: 40px;">
+                    <div style="font-size: 5em; margin-bottom: 20px;">${emoji}</div>
+                    <h2 style="color: #667eea; margin-bottom: 20px;">Quiz Complete!</h2>
+                    <div class="score-display">
+                        <h3 style="font-size: 3em; margin-bottom: 10px;">${percentage}%</h3>
+                        <p style="font-size: 1.5em;">You scored ${quizScore} out of ${quizQuestions.length}</p>
+                    </div>
+                    <p style="font-size: 1.3em; margin-top: 30px; color: #495057;">${message}</p>
+                </div>
+            `;
+            
+            document.getElementById('nextQuizBtn').style.display = 'none';
+            document.getElementById('prevQuizBtn').style.display = 'none';
+            document.getElementById('restartQuizBtn').style.display = 'inline-block';
+        }
+
+        function restartQuiz() {
+            initializeQuiz();
+        }
+    </script>
+</body>
+</html>
