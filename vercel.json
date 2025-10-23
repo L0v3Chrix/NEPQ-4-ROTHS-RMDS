@@ -1,8 +1,0 @@
-{
-  "version": 2,
-  "buildCommand": "cd site && npm run build",
-  "devCommand": "cd site && npm run dev",
-  "installCommand": "cd site && npm install",
-  "framework": null,
-  "outputDirectory": "site/.next"
-}

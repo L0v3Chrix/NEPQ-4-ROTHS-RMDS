@@ -18,6 +18,7 @@ All project documentation is located in the `/docs` folder:
 - [Technical Specification](./docs/2025-10-23-technical-spec.md) - Architecture and tech stack
 - [Component Breakdown](./docs/2025-10-23-component-breakdown.md) - Component details and design system
 - [Deployment Plan](./docs/2025-10-23-deployment-plan.md) - Deployment instructions
+- [NOT_FOUND Error Fix](./docs/2025-10-23-not-found-error-fix.md) - Troubleshooting guide
 
 ## 🚀 Quick Start
 
@@ -28,9 +29,6 @@ All project documentation is located in the `/docs` folder:
 ### Installation
 
 ```bash
-# Navigate to site folder
-cd site
-
 # Install dependencies
 npm install
 
@@ -55,19 +53,19 @@ npm run start
 ```
 /NEPQ-Roth-RMD/
 ├── /docs/                  # Comprehensive documentation
-├── /site/                  # Next.js application
-│   ├── /app/              # Next.js App Router
-│   ├── /components/       # React components
-│   ├── /lib/              # Data files and utilities
-│   ├── /types/            # TypeScript type definitions
-│   └── package.json
-├── nepq-training-guide.html  # Original HTML file
+├── /app/                   # Next.js App Router
+├── /components/            # React components
+├── /lib/                   # Data files and utilities
+├── /types/                 # TypeScript type definitions
+├── /public/                # Static assets
+├── package.json
+├── next.config.ts
 └── README.md
 ```
 
 ## 🛠️ Tech Stack
 
-- **Framework**: Next.js 15 (App Router)
+- **Framework**: Next.js 16 (App Router)
 - **Language**: TypeScript (strict mode)
 - **Styling**: Tailwind CSS
 - **Animation**: Framer Motion
@@ -95,44 +93,17 @@ The training covers six essential stages:
 
 ### Vercel (Recommended) ⭐
 
-**⚠️ IMPORTANT: This project uses a `/site` subfolder structure.**
-
-#### Option 1: Vercel Dashboard (Easiest)
+This is a standard Next.js 16 app that deploys directly to Vercel:
 
 1. Go to: https://vercel.com/new
 2. Import repository: `L0v3Chrix/NEPQ-4-ROTHS-RMDS`
-3. **CRITICAL:** Set **Root Directory** to `site` (not blank!)
-4. Click Deploy
+3. Click Deploy (Vercel auto-detects Next.js)
 
-#### Option 2: Vercel CLI
-
-```bash
-# Navigate to site folder first
-cd site
-
-# Login and deploy
-vercel login
-vercel --prod
-```
-
-**Why Root Directory Matters:**
-- The Next.js app lives in `/site` folder
-- Vercel needs to know where to find `package.json`
-- Without this setting, you'll get a 404 error
-
-See complete deployment guide: [Vercel 404 Fix](./docs/2025-10-23-vercel-404-fix-complete.md)
+**That's it!** No special configuration needed.
 
 ### Troubleshooting
 
-If you get a 404 error after deploying:
-- Check that Root Directory is set to `site` in Vercel settings
-- See detailed fix: `/docs/2025-10-23-vercel-404-fix-complete.md`
-
-### All Documentation
-
-- [Deployment Plan](./docs/2025-10-23-deployment-plan.md) - Original deployment instructions
-- [Bug Report & Fixes](./docs/2025-10-23-bug-report-and-fixes.md) - Troubleshooting guide
-- [Vercel 404 Fix](./docs/2025-10-23-vercel-404-fix-complete.md) - Complete error resolution
+See complete deployment troubleshooting: [NOT_FOUND Error Fix](./docs/2025-10-23-not-found-error-fix.md)
 
 ## 📄 License
 
