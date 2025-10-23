@@ -93,20 +93,46 @@ The training covers six essential stages:
 
 ## 🚢 Deployment
 
-### Vercel (Recommended)
-```bash
-# Install Vercel CLI
-npm i -g vercel
+### Vercel (Recommended) ⭐
 
-# Deploy
+**⚠️ IMPORTANT: This project uses a `/site` subfolder structure.**
+
+#### Option 1: Vercel Dashboard (Easiest)
+
+1. Go to: https://vercel.com/new
+2. Import repository: `L0v3Chrix/NEPQ-4-ROTHS-RMDS`
+3. **CRITICAL:** Set **Root Directory** to `site` (not blank!)
+4. Click Deploy
+
+#### Option 2: Vercel CLI
+
+```bash
+# Navigate to site folder first
 cd site
+
+# Login and deploy
+vercel login
 vercel --prod
 ```
 
-### GitHub Pages
-Configure in `next.config.ts` for static export and deploy via GitHub Actions.
+**Why Root Directory Matters:**
+- The Next.js app lives in `/site` folder
+- Vercel needs to know where to find `package.json`
+- Without this setting, you'll get a 404 error
 
-See [Deployment Plan](./docs/2025-10-23-deployment-plan.md) for detailed instructions.
+See complete deployment guide: [Vercel 404 Fix](./docs/2025-10-23-vercel-404-fix-complete.md)
+
+### Troubleshooting
+
+If you get a 404 error after deploying:
+- Check that Root Directory is set to `site` in Vercel settings
+- See detailed fix: `/docs/2025-10-23-vercel-404-fix-complete.md`
+
+### All Documentation
+
+- [Deployment Plan](./docs/2025-10-23-deployment-plan.md) - Original deployment instructions
+- [Bug Report & Fixes](./docs/2025-10-23-bug-report-and-fixes.md) - Troubleshooting guide
+- [Vercel 404 Fix](./docs/2025-10-23-vercel-404-fix-complete.md) - Complete error resolution
 
 ## 📄 License
 
